@@ -3,10 +3,18 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "functions"
+name = "my-functions-akshay"
 version = "0.1.0"
-description = "Personal reusable Python utility functions"
+description = "A collection of reusable Python utility functions"
+readme = "README.md"
 requires-python = ">=3.8"
+authors = [
+    { name = "Akshay Ijalkar" }
+]
+
+[project.urls]
+Homepage = "https://github.com/akshayijalkar/my_functions"
+Repository = "https://github.com/akshayijalkar/my_functions"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
