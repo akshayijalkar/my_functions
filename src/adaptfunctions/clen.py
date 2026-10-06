@@ -1,35 +1,19 @@
 def clen(value):
     """
-    Analyze a string and return grouped strings, integers, and floats.
+    Analyze a string and separate:
+    - alphabetic strings
+    - integers
+    - floats
 
-    Rules
-    -----
-    Characters:
-        Consecutive A-Z / a-z characters are grouped as strings.
-
-    Integers:
-        Consecutive digits are grouped as one integer.
-        int_len is the total number of digits in all integer groups.
-
-    Floats:
-        A number containing a decimal point followed by digits
-        is treated as one float.
-
-        Examples:
-            123.45 -> float
-            .45    -> float
-            123.   -> integer + ignored '.'
-            . 45   -> ignored '.' + integer
-
-    Spaces and special characters:
-        They are ignored and are NOT included in char_len.
+    Also prints string, int, and float_values
+    in tabular column format.
 
     Returns
     -------
     dict
         {
-            "char_len": total length of all string groups,
-            "int_len": total length of all integer groups,
+            "char_len": total alphabetic character count,
+            "int_len": total integer digit count,
             "float": number of float groups,
             "string": list of string groups,
             "int": list of integer groups,
@@ -49,9 +33,9 @@ def clen(value):
 
     while i < length:
 
-        # -----------------------------------------------
+        # -----------------------------
         # STRING
-        # -----------------------------------------------
+        # -----------------------------
         if value[i].isalpha():
 
             start = i
@@ -62,21 +46,17 @@ def clen(value):
             strings.append(value[start:i])
             continue
 
-        # -----------------------------------------------
-        # NUMBER STARTING WITH A DIGIT
-        # -----------------------------------------------
+        # -----------------------------
+        # NUMBER STARTING WITH DIGIT
+        # -----------------------------
         if value[i].isdigit():
 
             start = i
 
-            # Read complete integer part
             while i < length and value[i].isdigit():
                 i += 1
 
-            # Check whether this is a float
-            #
-            # 123.45 -> float
-            # 123.   -> integer
+            # Check for float
             if (
                 i < length
                 and value[i] == "."
@@ -86,7 +66,6 @@ def clen(value):
 
                 i += 1
 
-                # Read decimal part
                 while i < length and value[i].isdigit():
                     i += 1
 
@@ -97,13 +76,9 @@ def clen(value):
 
             continue
 
-        # -----------------------------------------------
+        # -----------------------------
         # FLOAT STARTING WITH "."
-        # -----------------------------------------------
-        #
-        # .45 -> float
-        # . 45 -> NOT float
-        #
+        # -----------------------------
         if (
             value[i] == "."
             and i + 1 < length
@@ -111,7 +86,6 @@ def clen(value):
         ):
 
             start = i
-
             i += 1
 
             while i < length and value[i].isdigit():
@@ -120,24 +94,53 @@ def clen(value):
             floats.append(value[start:i])
             continue
 
-        # -----------------------------------------------
-        # SPACE / SPECIAL CHARACTER
-        # -----------------------------------------------
-        #
-        # Ignore it.
-        #
+        # Ignore special characters/spaces
         i += 1
 
-    # -----------------------------------------------
-    # FINAL VALUES
-    # -----------------------------------------------
-
-    return {
+    # -----------------------------
+    # RESULT
+    # -----------------------------
+    result = {
         "char_len": sum(len(item) for item in strings),
         "int_len": sum(len(item) for item in integers),
         "float": len(floats),
-
         "string": strings,
         "int": integers,
         "float_values": floats,
     }
+
+    # -----------------------------
+    # LENGTH INFORMATION
+    # -----------------------------
+    print(f"char_len : {result['char_len']}")
+    print(f"int_len  : {result['int_len']}")
+    print(f"float    : {result['float']}")
+
+    print()
+
+    # -----------------------------
+    # TABLE
+    # -----------------------------
+    print(f"{'string':<20}{'int':<20}{'float_values':<20}")
+    print("-" * 60)
+
+    max_rows = max(
+        len(strings),
+        len(integers),
+        len(floats),
+        1
+    )
+
+    for index in range(max_rows):
+
+        string_value = strings[index] if index < len(strings) else ""
+        int_value = integers[index] if index < len(integers) else ""
+        float_value = floats[index] if index < len(floats) else ""
+
+        print(
+            f"{string_value:<20}"
+            f"{int_value:<20}"
+            f"{float_value:<20}"
+        )
+
+    return result
