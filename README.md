@@ -4,9 +4,26 @@
 [![Python](https://img.shields.io/pypi/pyversions/adaptfunctions.svg)](https://pypi.org/project/adaptfunctions/)
 [![GitHub](https://img.shields.io/badge/GitHub-source-181717?logo=github)](https://github.com/akshayijalkar/my_functions)
 
-**adaptfunctions** is a Python utility package for analyzing mixed text. Its first documented helper, `clen()`, extracts alphabetic sequences, integers, and decimal numbers from a string and provides both a structured result and a readable console table.
+**adaptfunctions** is an evolving, open-source Python library of reusable utility functions designed to **save development time, reduce repetitive code, and simplify common analysis tasks**. The project aims to collect practical functions that make it easier to inspect, process, and analyze data without repeatedly writing the same helper logic.
 
-> Unlike Python's built-in `len()`, which returns the number of elements, `clen()` classifies different kinds of content within a string. It is not a drop-in replacement for `len()`.
+Its long-term goal is to build a useful toolkit for programmers, students, analysts, and researchers. Functions will be added and improved over time as the library grows.
+
+## Project goals
+
+- **Save time:** Reuse common operations instead of implementing them from scratch.
+- **Support analysis:** Provide small, practical tools for examining and processing data.
+- **Simplify workflows:** Keep utility functions straightforward to install, import, and use.
+- **Grow over time:** Expand the collection based on real-world needs and community contributions.
+
+## Currently available
+
+| Function | Purpose |
+| --- | --- |
+| `clen(value)` | Analyze a mixed-content string; extract alphabetic, integer, and decimal groups; print a summary/table; and return structured results. |
+
+Future functions may cover additional text, numerical, and data-analysis tasks. These are **project directions**, not features available in the current release.
+
+> `clen()` differs from Python's built-in `len()`: it categorizes text content rather than simply returning a sequence length, and it is not a drop-in replacement for `len()`.
 
 ## Installation
 
